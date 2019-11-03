@@ -1,0 +1,172 @@
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+<p-panel>
+    <p-toast></p-toast>
+
+    <!-- Consumimos nuestra columnas dinamicas de la variable cols, que declaramos en paisee.componenent.ts -->
+    <p-table [value]="paises" [resizableColumns]="true" [columns]="cols" [paginator]="true" [rows]="5"
+        [(selection)]="seleccionarPais" selectionMode="single" dataKey="paisid">
+        <ng-template pTemplate="caption">
+            <div class="ui-helper-clearfix" style="font-size:16px;text-align: center">
+                <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px"></span>
+                Listado de Paises
+                <button type="button" pButton icon="pi pi-plus" iconPos="left" label="Nuevo"
+                    (click)="viewNuevoRegistro()" style="float:right"></button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th>
+                    FECHA INDEPENDENCIA
+                </th>
+
+                <th>
+                    TIENE MONARQUIA?
+                </th>
+                <th>
+                    Acción
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template let-paises let-columns="columns" pTemplate="body">
+            <tr [pSelectableRow]="paises">
+                <td *ngFor="let col of columns" class="ui-resizable-column">
+                    {{paises[col.field]}}
+                </td>
+                <td>
+                    {{paises.fecIndependencia | date: 'dd/MM/yyyy'}}
+                </td>
+                <td>
+                    {{paises.sn_monarquia}}
+                </td>
+                <td>
+                    <button pButton icon="pi pi-info-circle" class="ui-button-rounded ui-button-success"
+                        (click)="seleccionPaisBoton(paises,'U')" label="Editar"></button>
+
+                    <button pButton icon="pi pi-times-circle" class="ui-button-rounded ui-button-danger"
+                        (click)="seleccionPaisBoton(paises,'D')" label="Borrar"></button>
+
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+    <br />
+
+    <p-footer class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">
+        <button class="ui linkedin button"><i class="linkedin icon"></i>www.linkedin.com/in/arfloreshn</button>
+    </p-footer>
+
+</p-panel>
+
+<p-dialog header="Crear un nuevo Pais" [(visible)]="frmCrear" [responsive]="true" showEffect="fade" [modal]="true"
+    [style]="{'width' : '300px'}">
+
+
+    <div class="ui-g ui-fluid" *ngIf="paises">
+        <div class="ui-g-12">
+            <div class="ui-g-4">
+                <label for="nomPais">Pais</label>
+            </div>
+            <br />
+            <input pInputText id="nomPais" [(ngModel)]="entidad.nomPais" />
+
+            <p class="ui-g-4">Continente</p>
+            <p-dropdown [options]="continentes" [(ngModel)]="entidad.idContinente"></p-dropdown>
+            <br />
+
+            <div>
+                <p>Fecha Independencia</p>
+                <p-calendar [(ngModel)]="entidad.fecIndependencia" [showIcon]="true" [monthNavigator]="true"
+                    [yearNavigator]="true" [locale]="es" dateFormat="dd/mm/yy" showButtonBar="true">
+                </p-calendar>
+            </div>
+
+
+        </div>
+    </div>
+
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa fa-check" (click)="cmdcrearnuevoregistro()" label="Guardar"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog header="Editar Registro" [(visible)]="frmEditar" [responsive]="true" showEffect="fade" [modal]="true"
+    [style]="{width: '300px'}">
+
+    <div class="ui-g ui-fluid" *ngIf="paises">
+        <div class="ui-g-12">
+            <div class="ui-g-4">
+                <label for="nombrePais">Pais</label>
+            </div>
+            <br />
+            <input name="nomPais" id="nombrePais" pInputText [(ngModel)]="seleccionarPais.nomPais" />
+
+            <div>
+                <p>Fecha Independencia</p>
+                <p-calendar [(ngModel)]="seleccionarPais.fecIndependencia" [showIcon]="true" [monthNavigator]="true"
+                    [yearNavigator]="true" [locale]="es" dateFormat="dd/mm/yy" showButtonBar="true">
+                </p-calendar>
+            </div>
+
+
+            <h3 class="first">Seleccione un continente</h3>
+            <p-radioButton name="groupname" value=1 label="Asia" [(ngModel)]="seleccionarPais.idContinente">
+            </p-radioButton>
+            <br />
+            <p-radioButton name="groupname" value=2 label="America" [(ngModel)]="seleccionarPais.idContinente">
+            </p-radioButton>
+            <br />
+            <p-radioButton name="groupname" value=3 label="Africa" [(ngModel)]="seleccionarPais.idContinente">
+            </p-radioButton>
+            <br />
+            <p-radioButton name="groupname" value=4 label="Antartida" [(ngModel)]="seleccionarPais.idContinente">
+            </p-radioButton>
+            <br />
+            <p-radioButton name="groupname" value=5 label="Oceania" [(ngModel)]="seleccionarPais.idContinente">
+            </p-radioButton>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa fa-check" (click)="cmdmodificarregistro()" label="Guardar"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog header="Borrar Registro" [(visible)]="frmBorrar" [responsive]="true" showEffect="fade" [modal]="true"
+    icon="pi pi-exclamation-triangle" [style]="{width: '300px'}">
+
+    <div class="ui-g ui-fluid" *ngIf="paises">
+        <div class="ui-g-12">
+
+            <div class="ui-g-4">
+                <label for="paisid">Id</label>
+            </div>
+            <div class="ui-g-8">
+                <input pInputText id="paisid" [(ngModel)]="seleccionarPais.paisid" />
+            </div>
+
+
+            <div class="ui-g-4">
+                <label for="nomPais">Pais</label>
+            </div>
+            <div class="ui-g-8">
+                <input pInputText id="nomPais" [(ngModel)]="seleccionarPais.nomPais" />
+            </div>
+
+
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-check" (click)="cmdborraregistro()" label="Continuar"></button>
+        </div>
+    </p-footer>
+</p-dialog>
