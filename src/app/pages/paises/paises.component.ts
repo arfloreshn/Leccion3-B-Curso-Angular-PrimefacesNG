@@ -31,7 +31,6 @@ export class PaisesComponent implements OnInit {
   frmEditar: boolean = false;
   frmBorrar: boolean = false;
 
-
   ////////////////////////// VARIABLES DE ARRREGLOS ///////////////////////////////////
   //         EN ESTA SECCION SE DECLARAN TODOS LOS ARREGLOS QUE VAMOS A CONSUMIR
   ////////////////////////////////////////////////////////////////////////////////////

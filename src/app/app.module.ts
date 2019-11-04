@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import {FormsModule} from '@angular/forms'; 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import {DatePipe} from '@angular/common';
 
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './login/login.component';
+
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BreadcrumbsComponent } from './share/breadcrumbs/breadcrumbs.component';
 import { RegistroComponent } from './pages/registro/registro.component';
@@ -11,9 +15,7 @@ import { PaisesComponent } from './pages/paises/paises.component';
 import { SidebarComponent } from './share/sidebar/sidebar.component';
 import { HeaderComponent } from './share/header/header.component';
 
-import {FormsModule} from '@angular/forms'; 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+
 import {TableModule} from 'primeng/table';
 import {PanelModule} from 'primeng/panel';
 import {ButtonModule} from 'primeng/button';
@@ -28,20 +30,18 @@ import {InputTextModule} from 'primeng/inputtext';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
-
-import {DatePipe} from '@angular/common';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
-   
+
+
 @NgModule({
   declarations: [AppComponent,
     PaisesComponent,
-    LoginComponent,
     DashboardComponent,
     SidebarComponent,
     HeaderComponent,
     BreadcrumbsComponent,
-    RegistroComponent 
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
