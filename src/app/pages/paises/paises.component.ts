@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { SelectItem } from 'primeng/api';
 
 
+
 // Importa la clase de modelo de pais
 import { Paises } from 'src/app/modelo/paises';
 
@@ -15,6 +16,7 @@ import { Continentes } from 'src/app/modelo/continentes';
 
 // Importa la clase de servicios de paises
 import { PaisesService } from 'src/app/services/paises.service';
+
 
 @Component({
   selector: 'app-paises',
@@ -97,6 +99,8 @@ export class PaisesComponent implements OnInit {
     private datePipe: DatePipe,
     private confirmationService: ConfirmationService) {
 
+
+      
     interface Continentes {
       id: number;
       nomContinente: string;
@@ -135,8 +139,8 @@ export class PaisesComponent implements OnInit {
 
     //Los campos del arreglo para las columnas, se deben llamar exactamente igual nombre del modelo de la clase pais
     this.cols = [
-      { field: "paisid", header: "ID"}
-      , { field: "nomPais", header: "PAIS"}
+      {field: "paisid", header: "ID"}
+      ,{ field: "nomPais", header: "PAIS"}
     ];
 
 
@@ -204,19 +208,40 @@ export class PaisesComponent implements OnInit {
         let var_paises: Paises[] = [];
         for (let i = 0; i < result.length; i++) {
 
+          //Covertimos a una cadena de texto
           let var_cadena_json = JSON.stringify(result[i]);
+
           //console.log(cadena);
-          let var_cadena_fecha = "'"+ var_cadena_json.substr(21,10) + "'";
-          let var_nueva_fecha = new Date(this.datePipe.transform(var_cadena_fecha, 'yyyy-MM-dd', 'es-ES'));
+
+          let var_yy = parseInt(var_cadena_json.substr(21,4),10);
+          let var_mm = parseInt(var_cadena_json.substr(26,2),10);
+          let var_dd = parseInt(var_cadena_json.substr(29,2),10);
+          let var_hh = +var_cadena_json.substr(30,2);
+
+
+          let var_cadena_fecha1 =   "'" + var_yy + "/"+ var_mm + "/" + var_dd + "'" ;
+         
+          //var datePipe = new DatePipe("es-HN");
+          //let var_cadena_fecha2 = datePipe.transform(var_cadena_fecha1, 'dd/MM/yyyy');
+          
+          console.log(var_cadena_fecha1);
+
+          //new Date(year, month, day, hours, minutes, seconds, milliseconds)
+
+          var var_nueva_fecha = new Date(var_cadena_fecha1);
+          //var var_nueva_fecha = new Date(var_yy,  var_mm-1, var_dd, 0,0,0,0);
 
           let puntero = result[i] as Paises
          
           //Reasigno el nuevo valor de la fecha
-          puntero.fecIndependencia = var_nueva_fecha;
+          //Esto est correcto porque asi no tiene definido 
+          puntero.fecIndependencia = new Date(var_yy,  var_mm-1, var_dd); //Svar_nueva_fecha;
           var_paises.push(puntero);
         }
 
+        
         this.paises = var_paises;
+        
         //console.log(result);
       },
       //muestro el error en la consola de nuestro navegador en caso de que ocurra alguna error
@@ -243,6 +268,8 @@ export class PaisesComponent implements OnInit {
         let var_pais = result as Paises;
         this.paises.push(var_pais);
         this.ListarTodo();
+        
+        //
         this.messageService.add({ severity: 'success', summary: 'Procesado', detail: 'Registro guardado, existosamente' });
         this.frmCrear = false;
       },

@@ -12,7 +12,7 @@ const httOpciones = {
 })
 export class PaisesService {
 
-    apiUrl:String = "http://localhost:8080/cines/api/servicio.paises";
+    apiUrl:String = "http://localhost:8088/cines/api/servicio.paises";
     
     constructor(private http:HttpClient) { }
 

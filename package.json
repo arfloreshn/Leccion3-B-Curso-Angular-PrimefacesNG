@@ -1,10 +1,10 @@
 {
-  "name": "leccion3-b",
+  "name": "leccion3b",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve -o",
+    "build": "ng build --prod --aotn",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

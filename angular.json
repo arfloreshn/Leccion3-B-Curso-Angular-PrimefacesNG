@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "leccion3-B": {
+    "leccion3b": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/leccion3-B",
+            "outputPath": "dist/leccion3b",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -23,14 +23,13 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": ["node_modules/semantic-ui-css/semantic.min.css",
-              "node_modules/primeflex/primeflex.css",
+            "styles": ["node_modules/primeflex/primeflex.css",
                "node_modules/primeicons/primeicons.css",
                "node_modules/primeng/resources/themes/nova-colored/theme.css",
                "node_modules/primeng/resources/primeng.min.css",
                "src/styles.css"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js"]
+            "scripts": ["node_modules/jquery/dist/jquery.min.js"]        
           },
           "configurations": {
             "production": {
@@ -67,21 +66,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "leccion3-B:build"
+            "browserTarget": "leccion3b:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "leccion3-B:build:production"
+              "browserTarget": "leccion3b:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "leccion3-B:build"
+            "browserTarget": "leccion3b:build"
           }
         }
       }
     }},
-  "defaultProject": "leccion3-B"
+  "defaultProject": "leccion3b"
 }
