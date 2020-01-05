@@ -16,9 +16,6 @@ Simple Cliente CRUD hecho con Angular 8.3.6.
 - Nginx
 - Apache Tomcat 9
 
-# Imagenes del proyecto
-
-
 # TABLA DE REGISTROS
 <p>
   <img src="https://github.com/arfloreshn/Leccion3-B-Curso-Angular-PrimefacesNG/blob/master/src/assets/foto1.jpg" width="100%" height="300" title="Abm de mantenimiento">
